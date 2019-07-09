@@ -1,0 +1,70 @@
+#id-div-util {
+  position: fixed;
+  top: 6px;
+  left: 6px;
+  z-index: 1;
+
+  input[type="button"] {
+    font-size: 0.7em;
+    padding: 2px;
+  }
+
+  p {
+    margin: 0px;
+    display: inline;
+  }
+
+  * {
+    vertical-align: middle;
+  }
+}
+
+#id-position {
+  font-size: 10px;
+  line-height: 10px;
+  width: 10px;
+  height: 10px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#id-div-header {
+  text-align: center;
+}
+
+#id-div-kraj {
+  text-align: center;
+
+  input[type="button"] {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+.class-connection-status-connecting {
+  color: yellow;
+}
+
+.class-connection-status-open {
+  color: green;
+}
+
+.class-connection-status-closing {
+  color: brown;
+}
+
+.class-connection-status-closed {
+  color: red;
+}
+
+#id-pointer {
+  margin: 0px;
+  position: fixed;
+  color: red;
+  font-size: 10px;
+  line-height: 10px;
+  width: 10px;
+  height: 10px;
+  vertical-align: middle;
+  text-align: center;
+}

@@ -1,0 +1,22 @@
+.class-question{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 20px;
+  //padding-bottom: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+
+  .class-question-main{
+    p{
+      display: inline;
+    }
+  }
+}
+
+.class-question-active{
+  border-color: #F00;
+}

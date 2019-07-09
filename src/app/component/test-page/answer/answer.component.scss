@@ -1,0 +1,23 @@
+.class-answer {
+  padding-top: 25px;
+  padding-bottom: 25px;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+
+  input[type="radio"] {
+    margin-top: 0px;
+    vertical-align: middle;
+  }
+
+  p {
+    display: inline-block;
+    margin: 0px 0px 0px 6px;
+    vertical-align: middle;
+  }
+}
+
+.class-answer-active{
+  border-color: #F00;
+}
