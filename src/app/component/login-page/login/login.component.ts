@@ -15,6 +15,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Route to test
+   */
   onStart(){
     this._router.navigate(['test', { username: this.username }]);
   }

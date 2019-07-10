@@ -7,6 +7,9 @@ import { Message } from '@stomp/stompjs';
 import { WebsocketService } from 'src/app/service/websocket.service';
 import { Point } from 'src/app/model/point';
 import { LocationService } from 'src/app/service/location.service';
+import { Result } from 'src/app/model/result';
+import { ResultService } from 'src/app/service/result.service';
+import { ChooseAnswerService } from 'src/app/service/choose-answer.service';
 
 @Component({
   selector: 'app-test',
@@ -18,7 +21,6 @@ export class TestComponent implements OnInit {
   username:string;
   questions:Question[];
   point: Point;
-  pointStyle: any;
   debugOn: Boolean;
   connectionStatus: RxStompState;
   rxStompStates = RxStompState;
@@ -26,41 +28,50 @@ export class TestComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private questionService: QuestionService,
+              private resultService: ResultService,
               private websocketService: WebsocketService,
-              private locationService: LocationService) { }
+              private locationService: LocationService,
+              private chooseAnswerService: ChooseAnswerService) { }
 
   ngOnInit() {
-
-    this.debugOn = true;
+    this.debugOn = false;
     this.point = <Point>{};
 
-    // uzimamo username iz url-a
+    // extract username from url
     this.route.params.subscribe(params => {
       this.username = params['username'];
     });
 
-    // ucitavamo pitanja
+    // load questions
     this.questionService.getAll().subscribe(data => {
       this.questions = data;
+      this.chooseAnswerService.init(this.questions);
     });
 
+    // listening for websocket connection state change
     this.websocketService.connectionState$.subscribe(state => {
       this.connectionStatus = state;
     });
 
+    // receiving messages from websocket connection
     this.websocketService.subscribe((message: Message) => {
       let messageObject = JSON.parse(message.body);
       this.point.x = messageObject.fpogx * window.screen.width;
       this.point.y = messageObject.fpogy * window.screen.height;
-      this.setPointStyle();
       if( ! messageObject.connectionActive){
         console.log('Server sent disconnect message.');
         this.websocketService.deactivate();
       }
+
+      // set current eye coordinates in locationService
       this.locationService.setCurrentLocation(this.point);
     });
   }
 
+
+  /** 
+  * Returns style object to position Red Dot on received coordinates.
+  */
   setPointStyle(){
     return { 'left.px': (this.point.x - 5), 'top.px': (this.point.y - 5)};
   }
@@ -73,20 +84,36 @@ export class TestComponent implements OnInit {
     this.websocketService.deactivate();
   }
 
+  /**
+   * Returns style object to color websocket indicator dot based on current 
+   * connection status.
+   */
   setConnectionStatusClass(){
-    return {
-      'class-connection-status-connecting': this.connectionStatus==RxStompState.CONNECTING,
-      'class-connection-status-open': this.connectionStatus==RxStompState.OPEN,
-      'class-connection-status-closing': this.connectionStatus==RxStompState.CLOSING,
-      'class-connection-status-closed': this.connectionStatus==RxStompState.CLOSED
-    };
+    return {['class-connection-status-' + RxStompState[this.connectionStatus]]: true};
   }
 
-  onDebugChanged(){
-    console.log(this.debugOn);
-  }
+  /** 
+  * Checks if all questions are answered. If they are, test results 
+  * and log are sent to server.
+  * Runs on button press.
+  */
+  onClickEnd(){
+    
+    // check if all questions are answered
+    if( ! this.chooseAnswerService.check()){
+      console.log('Questions not answered!');
+      return;
+    }
 
-  onClickKraj(){
-    console.log("click");
+    // create result object
+    let result: Result = <Result>{};
+    result.name = this.username;
+    result.log = this.locationService.log;
+    result.answers = this.chooseAnswerService.questionAnswerPairs;
+
+    // send result to server
+    this.resultService.create(result).subscribe(data => {
+      // todo
+    });
   }
 }

@@ -3,36 +3,34 @@
 
 <!-- Util panel -->
 <div id="id-div-util">
-  <input type="button" [disabled]="!(connectionStatus==rxStompStates.CLOSED)" (click)="onButtonConnectClick()" value="Connect" />
+  <input type="button" [disabled]="!(connectionStatus==rxStompStates.CLOSED)" (click)="onButtonConnectClick()" value="Connect"/>
   <input type="button" [disabled]="!(connectionStatus==rxStompStates.OPEN)" (click)="onButtonDisconnectClick()" value="Disconnect"/>
-  <!-- <span id="id-status-connected" style="color: red;">&#11044;</span> -->
   <span [ngClass]="setConnectionStatusClass()">&#11044;</span>
   <br>
-  <!-- <input #debugCheckbox type="checkbox" (click)="onDebugCheckboxClick(debugCheckbox.checked)" /> -->
-  <input type="checkbox"  [(ngModel)]="debugOn" (ngModelChange)="onDebugChanged()"/>
+  <input type="checkbox" [(ngModel)]="debugOn"/>
   <p>Debug</p>
 </div>
 
 <div class="container-fluid">
 
-  <!-- HEADER -->
+  <!-- Header -->
   <div class="row">
     <div id="id-div-header" class="col-12">
       <h1>Welcome {{username}}</h1>
     </div>
   </div>
 
-  <!-- Pitanja -->
+  <!-- Questions -->
   <div class="row">
     <app-question *ngFor="let question of questions" [question]="question" [debugOn]="debugOn" class="col-12">
 
     </app-question>
   </div>
 
-  <!-- Kraj -->
+  <!-- End -->
   <div class="row">
-    <div id="id-div-kraj" class="col">
-      <input type="button" value="Kraj" (click)="onClickKraj()" />
+    <div id="id-div-end" class="col-12">
+      <input type="button" value="End" (click)="onClickEnd()" />
     </div>
   </div>
 

@@ -17,7 +17,7 @@ export class WebsocketService {
 
   constructor(private rxStompService: RxStompService) {
     this.connectionState$ = rxStompService.connectionState$
-    this.watch(this.path);
+    this.watchObservable = this.rxStompService.watch(this.path);
     this.rxStompService.configure(myRxStompConfig);
   }
 
@@ -28,10 +28,6 @@ export class WebsocketService {
 
   deactivate(){
     this.rxStompService.deactivate();
-  }
-  
-  watch(path: string){
-    this.watchObservable = this.rxStompService.watch(path);
   }
 
   subscribe(next){

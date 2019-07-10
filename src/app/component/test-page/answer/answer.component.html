@@ -1,4 +1,4 @@
-<div id="id-answer-{{answer.id}}" class="class-answer" [ngClass]="setActiveBorder()">
-  <input type="radio" name="{{question.id}}">
+<div class="class-answer" [ngClass]="setActiveBorder()">
+  <input type="radio" name="{{question.id}}" (click)="onClick()">
   <p>{{answer.body}}</p>
 </div>

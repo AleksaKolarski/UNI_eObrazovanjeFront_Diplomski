@@ -11,6 +11,7 @@ export class ResultService {
 
   constructor(private http: HttpClient) { }
 
+  
   create(result: Result){
     return this.http.post<Result>(this.path, result);
   }

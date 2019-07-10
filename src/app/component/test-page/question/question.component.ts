@@ -23,20 +23,18 @@ export class QuestionComponent implements OnInit {
               private el: ElementRef) { }
 
   ngOnInit() {
+    // listen for coordinate change
     this.locationService.currentLocation.subscribe( (point: Point) =>{
-      
-      // UZIMA SE POGRESNI (parent) ELEMENT I ZATO JE SELEKTOVANA I OKOLINA ELEMENTA
-      let rect = this.el.nativeElement.getBoundingClientRect();
-      if(point.x >= rect.left && point.x <= rect.right && point.y >= rect.top && point.y <= rect.bottom){
-        this.active = true;
-      }
-      else{
-        this.active = false;
-      }
-      this.locationService.activeQuestionState.set(this.question.id, this.active);
+      let rect = this.el.nativeElement.firstElementChild.getBoundingClientRect();
+      this.active = (point.x >= rect.left && point.x <= rect.right && point.y >= rect.top && point.y <= rect.bottom);
+      this.locationService.setActiveQuestionState(this.question.id, this.active);
     });
   }
 
+
+  /**
+   * Returns style object that colors border red/transparent based on active and debug state.
+   */
   setActiveBorder(){
     return {'class-question-active': this.active && this.debugOn};
   }
