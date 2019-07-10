@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { RxStompService } from '@stomp/ng2-stompjs';
 import { Observable, BehaviorSubject, PartialObserver } from 'rxjs';
-import { RxStompState } from '@stomp/rx-stomp';
+import { RxStompState, RxStompConfig } from '@stomp/rx-stomp';
 import { IMessage } from '@stomp/stompjs';
+import { myRxStompConfig } from '../my-rx-stomp.config';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class WebsocketService {
   constructor(private rxStompService: RxStompService) {
     this.connectionState$ = rxStompService.connectionState$
     this.watch(this.path);
+    this.rxStompService.configure(myRxStompConfig);
   }
 
 

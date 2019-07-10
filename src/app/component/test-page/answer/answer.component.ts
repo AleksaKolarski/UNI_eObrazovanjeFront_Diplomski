@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Answer } from 'src/app/model/answer';
 import { Question } from 'src/app/model/question';
+import { LocationService } from 'src/app/service/location.service';
+import { Point } from 'src/app/model/point';
 
 @Component({
   selector: 'app-answer',
@@ -21,10 +23,21 @@ export class AnswerComponent implements OnInit {
   active: Boolean;
 
 
-  constructor() { }
+  constructor(private locationService: LocationService,
+              private el: ElementRef) { }
 
   ngOnInit() {
-    this.active = true;
+    this.locationService.currentLocation.subscribe( (point: Point) =>{
+      // check if point is inside of this component
+      let rect = this.el.nativeElement.getBoundingClientRect();
+      if(point.x >= rect.left && point.x <= rect.right && point.y >= rect.top && point.y <= rect.bottom){
+        this.active = true;
+      }
+      else{
+        this.active = false;
+      }
+      this.locationService.activeAnswerState.set(this.answer.id, this.active);
+    });
   }
 
   // Set red border around answer

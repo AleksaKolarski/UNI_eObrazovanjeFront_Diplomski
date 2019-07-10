@@ -1,20 +1,19 @@
 import { Component, OnInit, OnDestroy, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Question } from 'src/app/model/question';
 import { QuestionService } from 'src/app/service/question.service';
 import { RxStompState } from '@stomp/rx-stomp';
 import { Message } from '@stomp/stompjs';
-import { GazepointMessage } from 'src/app/model/gazepoint-message';
 import { WebsocketService } from 'src/app/service/websocket.service';
 import { Point } from 'src/app/model/point';
+import { LocationService } from 'src/app/service/location.service';
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.scss']
 })
-export class TestComponent implements OnInit, OnDestroy {
+export class TestComponent implements OnInit {
 
   username:string;
   questions:Question[];
@@ -24,11 +23,11 @@ export class TestComponent implements OnInit, OnDestroy {
   connectionStatus: RxStompState;
   rxStompStates = RxStompState;
 
-  routeSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private questionService: QuestionService,
-              private websocketService: WebsocketService) { }
+              private websocketService: WebsocketService,
+              private locationService: LocationService) { }
 
   ngOnInit() {
 
@@ -36,7 +35,7 @@ export class TestComponent implements OnInit, OnDestroy {
     this.point = <Point>{};
 
     // uzimamo username iz url-a
-    this.routeSubscription = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.username = params['username'];
     });
 
@@ -58,6 +57,7 @@ export class TestComponent implements OnInit, OnDestroy {
         console.log('Server sent disconnect message.');
         this.websocketService.deactivate();
       }
+      this.locationService.setCurrentLocation(this.point);
     });
   }
 
@@ -80,11 +80,6 @@ export class TestComponent implements OnInit, OnDestroy {
       'class-connection-status-closing': this.connectionStatus==RxStompState.CLOSING,
       'class-connection-status-closed': this.connectionStatus==RxStompState.CLOSED
     };
-  }
-
-  ngOnDestroy() {
-    // cistimo
-    if(this.routeSubscription) this.routeSubscription.unsubscribe();
   }
 
   onDebugChanged(){

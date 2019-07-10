@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
-import { myRxStompConfig } from './my-rx-stomp.config';
-import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
+import { RxStompService } from '@stomp/ng2-stompjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,15 +26,9 @@ import { TestComponent } from './component/test-page/test/test.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [{
-    provide: InjectableRxStompConfig,
-    useValue: myRxStompConfig
-  },
-  {
-    provide: RxStompService,
-    useFactory: rxStompServiceFactory,
-    deps: [InjectableRxStompConfig]
-  }],
+  providers: [
+    RxStompService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
