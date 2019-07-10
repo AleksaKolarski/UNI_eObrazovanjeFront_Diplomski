@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Route to test
+   * Route to test page.
    */
   onStart(){
     this._router.navigate(['test', { username: this.username }]);
