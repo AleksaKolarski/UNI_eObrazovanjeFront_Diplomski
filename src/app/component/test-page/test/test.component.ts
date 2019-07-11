@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from 'src/app/model/question';
 import { QuestionService } from 'src/app/service/question.service';
 import { RxStompState } from '@stomp/rx-stomp';
@@ -31,7 +31,8 @@ export class TestComponent implements OnInit {
               private resultService: ResultService,
               private websocketService: WebsocketService,
               private locationService: LocationService,
-              private chooseAnswerService: ChooseAnswerService) { }
+              private chooseAnswerService: ChooseAnswerService,
+              private _router: Router) { }
 
   ngOnInit() {
     this.debugOn = false;
@@ -113,7 +114,7 @@ export class TestComponent implements OnInit {
 
     // send result to server
     this.resultService.create(result).subscribe(data => {
-      // todo
+      this._router.navigate(['']);
     });
   }
 }
