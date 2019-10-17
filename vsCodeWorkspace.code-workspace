@@ -2,7 +2,16 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"name": "ArduinoProject",
+			"path": "C:\\Users\\Aleksa\\Documents\\PlatformIO\\Projects\\ArduinoProject"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"terminal.integrated.env.windows": {
+			"PATH": "C:\\Users\\Aleksa\\.platformio\\penv\\Scripts;C:\\Users\\Aleksa\\.platformio\\penv;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\dart-sass;;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\dotnet\\;C:\\Program Files\\nodejs\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\Users\\Aleksa\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Users\\Aleksa\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Aleksa\\AppData\\Roaming\\npm;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\dart-sass;;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\dotnet\\;C:\\Program Files\\nodejs\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\Users\\Aleksa\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Users\\Aleksa\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Aleksa\\AppData\\Roaming\\npm",
+			"PLATFORMIO_CALLER": "vscode"
+		}
+	}
 }

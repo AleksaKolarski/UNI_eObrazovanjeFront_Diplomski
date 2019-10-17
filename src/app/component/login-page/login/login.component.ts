@@ -1,24 +1,26 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-  username:string;
+	username: string;
 
-  constructor(private _router: Router) { }
+	constructor(private _router: Router) { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
-  /**
-   * Route to test page.
-   */
-  onStart(){
-    this._router.navigate(['test', { username: this.username }]);
-  }
+	/**
+	 * Route to test page.
+	 */
+	onStart() {
+		if(this.username.trim() != "" && this.username != undefined){
+			this._router.navigate(['test', { username: this.username }]);
+		}
+	}
 }
