@@ -2,10 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"name": "ArduinoProject",
-			"path": "C:\\Users\\Aleksa\\Documents\\PlatformIO\\Projects\\ArduinoProject"
 		}
 	],
 	"settings": {

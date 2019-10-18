@@ -16,6 +16,10 @@ export class QuestionService {
     return this.http.get<Question[]>(this.path);
   }
 
+  getById(id: number): Observable<Question[]>{
+	  return this.http.get<Question[]>(this.path + "/" + id);
+  }
+
   create(question: Question){
     return this.http.post(this.path, question);
   }

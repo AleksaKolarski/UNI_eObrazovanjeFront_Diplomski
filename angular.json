@@ -27,7 +27,8 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap-4-grid/scss/grid.scss",
+				  "node_modules/bootstrap-4-grid/scss/grid.scss",
+				  "node_modules/vis/dist/vis.css", 
               "src/styles.scss"
             ],
             "scripts": [],

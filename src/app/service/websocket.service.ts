@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RxStompService } from '@stomp/ng2-stompjs';
-import { Observable, BehaviorSubject, PartialObserver } from 'rxjs';
-import { RxStompState, RxStompConfig } from '@stomp/rx-stomp';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { RxStompState } from '@stomp/rx-stomp';
 import { IMessage } from '@stomp/stompjs';
 import { myRxStompConfig } from '../my-rx-stomp.config';
 

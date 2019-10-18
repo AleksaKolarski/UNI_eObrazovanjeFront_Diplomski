@@ -16,25 +16,25 @@ import { ResultNameComponent } from './component/results-page/result-name/result
 import { ResultAnalyzeComponent } from './component/result-analyze-page/result-analyze/result-analyze.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    QuestionComponent,
-    AnswerComponent,
-    TestComponent,
-    ResultsComponent,
-    ResultNameComponent,
-    ResultAnalyzeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  providers: [
-    RxStompService
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		QuestionComponent,
+		AnswerComponent,
+		TestComponent,
+		ResultsComponent,
+		ResultNameComponent,
+		ResultAnalyzeComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		FormsModule
+	],
+	providers: [
+		RxStompService
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
