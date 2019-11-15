@@ -4,6 +4,7 @@ import { LoginComponent } from './component/login-page/login/login.component';
 import { TestComponent } from './component/test-page/test/test.component';
 import { ResultsComponent } from './component/results-page/results/results.component';
 import { ResultAnalyzeComponent } from './component/result-analyze-page/result-analyze/result-analyze.component';
+import { NewQuestionComponent } from './component/new-question-page/new-question/new-question.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
 	  path: 'result/analyze',
 	  component: ResultAnalyzeComponent
+  },
+  {
+	  path: 'addQuestion',
+	  component: NewQuestionComponent
   }
 ];
 

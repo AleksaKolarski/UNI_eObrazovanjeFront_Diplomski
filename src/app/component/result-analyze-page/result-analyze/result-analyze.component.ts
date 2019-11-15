@@ -4,6 +4,7 @@ import { Result } from 'src/app/model/result';
 import { ResultService } from 'src/app/service/result.service';
 import { Timeline } from 'vis';
 import { QuestionService } from 'src/app/service/question.service';
+import { Question } from 'src/app/model/question';
 
 @Component({
 	selector: 'app-result-analyze',
@@ -14,12 +15,10 @@ export class ResultAnalyzeComponent implements OnInit {
 
 	resultID: number;
 	result: Result;
-
 	lista: Object[];
 	grupe: Object[];
 	timeline: Timeline;
-
-	questions: any;
+	questions: Question[];
 
 	constructor(private route: ActivatedRoute,
 		private resultService: ResultService,
@@ -39,10 +38,9 @@ export class ResultAnalyzeComponent implements OnInit {
 	initQuestionList() {
 		this.questions = [];
 		this.result.answers.forEach(element => {
-			this.questionService.getById(element.questionId).subscribe(data => {
+			this.questionService.getById(element.questionId).subscribe((data: Question) => {
 				data['selectedAnswerId'] = element.answerId;
 				this.questions.push(data);
-				console.log(this.questions);
 			});
 		});
 	}
@@ -68,15 +66,20 @@ export class ResultAnalyzeComponent implements OnInit {
 				if (questionID == -1 && logEntry.after != -1) {
 					questionID = logEntry.after;
 					questionBegin = logEntry.time;
-					return;
 				}
-				if (questionID != -1 && (logEntry.after != questionID || logEntry.after == -1)) {
+				else if (questionID != -1 && (logEntry.after != questionID || logEntry.after == -1)) {
 					if (this.grupe.find((element) => {
 						return element['id'] == questionID.toString();
 					}) == undefined) {
 						this.grupe.push({ id: questionID.toString() });
 					}
-					this.lista.push({ content: questionID.toString(), start: new Date(questionBegin), end: new Date(logEntry.time), group: questionID.toString(), style: 'background-color: LightGray; line-height: 0; z-index: 0; font-size: 11px; height: 37px;' })
+					this.lista.push({
+						content: questionID.toString(), 
+						start: new Date(questionBegin), 
+						end: new Date(logEntry.time), 
+						group: questionID.toString(), 
+						style: 'background-color: LightGray; line-height: 0; z-index: 0; font-size: 11px; height: 37px;' 
+					});
 					questionID = logEntry.after;
 					questionBegin = logEntry.time;
 				}
@@ -85,10 +88,15 @@ export class ResultAnalyzeComponent implements OnInit {
 				if (answerID == -1 && logEntry.after != -1) {
 					answerID = logEntry.after;
 					answerBegin = logEntry.time;
-					return;
 				}
-				if (answerID != -1 && (logEntry.after != answerID || logEntry.after == -1)) {
-					this.lista.push({ content: logEntry.id.toString(), start: new Date(answerBegin), end: new Date(logEntry.time), group: questionID.toString(), style: 'text-align: center; height: 20px; font-size: 11px; z-index: 1;' })
+				else if (answerID != -1 && (logEntry.after != answerID || logEntry.after == -1)) {
+					this.lista.push({
+						content: answerID.toString(), 
+						start: new Date(answerBegin), 
+						end: new Date(logEntry.time), 
+						group: questionID.toString(), 
+						style: 'text-align: center; height: 20px; font-size: 11px; z-index: 1;' 
+					});
 					answerID = logEntry.after;
 					answerBegin = logEntry.time;
 				}
@@ -98,10 +106,7 @@ export class ResultAnalyzeComponent implements OnInit {
 
 	createTimeline() {
 		var container = document.getElementById('visualization');
-		var options = {
-			stack: false
-		};
 		this.createData();
-		this.timeline = new Timeline(container, this.lista, this.grupe, options);
+		this.timeline = new Timeline(container, this.lista, this.grupe, {stack: false});
 	}
 }

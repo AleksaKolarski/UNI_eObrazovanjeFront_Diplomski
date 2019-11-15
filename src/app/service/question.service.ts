@@ -16,8 +16,8 @@ export class QuestionService {
     return this.http.get<Question[]>(this.path);
   }
 
-  getById(id: number): Observable<Question[]>{
-	  return this.http.get<Question[]>(this.path + "/" + id);
+  getById(id: number): Observable<Question>{
+	  return this.http.get<Question>(this.path + "/" + id);
   }
 
   create(question: Question){

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RxStompService } from '@stomp/ng2-stompjs';
 
@@ -14,6 +14,7 @@ import { TestComponent } from './component/test-page/test/test.component';
 import { ResultsComponent } from './component/results-page/results/results.component';
 import { ResultNameComponent } from './component/results-page/result-name/result-name.component';
 import { ResultAnalyzeComponent } from './component/result-analyze-page/result-analyze/result-analyze.component';
+import { NewQuestionComponent } from './component/new-question-page/new-question/new-question.component';
 
 @NgModule({
 	declarations: [
@@ -24,13 +25,15 @@ import { ResultAnalyzeComponent } from './component/result-analyze-page/result-a
 		TestComponent,
 		ResultsComponent,
 		ResultNameComponent,
-		ResultAnalyzeComponent
+		ResultAnalyzeComponent,
+		NewQuestionComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
-		FormsModule
+		FormsModule, 
+		ReactiveFormsModule
 	],
 	providers: [
 		RxStompService

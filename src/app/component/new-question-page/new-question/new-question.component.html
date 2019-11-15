@@ -1,0 +1,24 @@
+<div>
+	<form [formGroup]="forma" (ngSubmit)="onSubmit()">
+		<label>Питање:</label>
+		<input formControlName="question" type="text" />
+		<br>
+		<label>Одговор 1:</label>
+		<input formControlName="answer1" type="text" />
+		<input formControlName="answer1Correct" type="checkbox" />
+		<br>
+		<label>Одговор 2:</label>
+		<input formControlName="answer2" type="text" />
+		<input formControlName="answer2Correct" type="checkbox" />
+		<br>
+		<label>Одговор 3:</label>
+		<input formControlName="answer3" type="text" />
+		<input formControlName="answer3Correct" type="checkbox" />
+		<br>
+		<label>Одговор 4:</label>
+		<input formControlName="answer4" type="text" />
+		<input formControlName="answer4Correct" type="checkbox" />
+		<br><br>
+		<button type="submit">Пошаљи питање</button>
+	</form>
+</div>
